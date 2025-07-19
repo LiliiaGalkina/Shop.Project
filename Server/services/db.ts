@@ -1,6 +1,6 @@
 import mysql, { Connection } from "mysql2/promise";
 
-const { DB_HOST, DB_PORT, DB_PASSWORD, DB_USER, DB_NAME } = process.env;
+const { DB_HOST, DB_PORT, DB_PASSWORD, DB_USER, DB_BASE } = process.env;
 
 
 export async function initDataBase(): Promise<Connection | null> {
@@ -12,7 +12,7 @@ export async function initDataBase(): Promise<Connection | null> {
       port: Number(DB_PORT),
       password: DB_PASSWORD,
       user: DB_USER,
-      database: DB_NAME,
+      database: DB_BASE,
     });
 	} catch (e) {
 		console.error(e.message || e);
