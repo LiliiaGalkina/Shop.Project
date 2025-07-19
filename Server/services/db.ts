@@ -1,10 +1,6 @@
 import mysql, { Connection } from "mysql2/promise";
 
-const host = process.env.DB_HOST;
-const port = Number(process.env.DB_PORT);
-const password = process.env.DB_PASSWORD;
-const user = process.env.DB_USER;
-const dbase = process.env.DB_BASE;
+const { DB_HOST, DB_PORT, DB_PASSWORD, DB_USER, DB_NAME } = process.env;
 
 
 export async function initDataBase(): Promise<Connection | null> {
@@ -12,12 +8,12 @@ export async function initDataBase(): Promise<Connection | null> {
 
 	try {
 		connection = await mysql.createConnection({
-			host: host,
-			port: port,
-			password: password,
-			user: user,
-			database: dbase,
-		})
+      host: DB_HOST,
+      port: Number(DB_PORT),
+      password: DB_PASSWORD,
+      user: DB_USER,
+      database: DB_NAME,
+    });
 	} catch (e) {
 		console.error(e.message || e);
 		return null;
