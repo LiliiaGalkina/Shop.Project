@@ -9,11 +9,11 @@ const throwServerError = (res: Response, e: Error) => {
   res.send("Something went wrong");
 };
 
-productsRouter.get("/", async (req: Request, res: Response) => {
-  try {
-    const products = await getProducts();
-	  res.render("products", { items: products });
-  } catch (e) {
-    throwServerError(res, e);
-  }
-});
+ productsRouter.get("/", async (req: Request, res: Response) => {
+   try {
+     const products = await getProducts();
+     res.render("products", { items: products });
+   } catch (e) {
+     throwServerError(res, e);
+   }
+ });
