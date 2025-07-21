@@ -14,7 +14,7 @@ export default function (dbConnection: Connection): Express {
 
   app.use("/comments", commentsRouter);
 	app.use("/products", productsRouter);
-	app.use("/auth", authRouter);
+	 app.use("/auth", authRouter);
 
   return app;
 }

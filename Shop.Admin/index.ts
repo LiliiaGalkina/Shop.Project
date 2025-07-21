@@ -8,13 +8,14 @@ import session from "express-session";
 
 export default function (): Express {
 	const app = express();
-	 app.use(
-     session({
-       secret: "abcde",
-       saveUninitialized: false,
-       resave: false,
-     })
-   );
+	
+	  app.use(
+      session({
+        secret: "abcde",
+        saveUninitialized: false,
+        resave: false,
+      })
+    );
 
 	app.use(express.json());
 	 app.use(bodyParser.urlencoded({ extended: false }));

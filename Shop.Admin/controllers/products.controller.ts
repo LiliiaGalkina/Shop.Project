@@ -19,7 +19,7 @@ const throwServerError = (res: Response, e: Error) => {
 };
 
 productsRouter.get("/", async (req: Request, res: Response) => {
-  try {
+	try {
     const products = await getProducts();
     res.render("products", {
       items: products,
