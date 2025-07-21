@@ -10,9 +10,18 @@ body {
 .header {
   padding: 20px 40px;
   border-bottom: 1px solid #00b1ffff;
+ 
+  a {
+	padding: 5px 10px;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	text-decoration: none;
+	color: #000000;
+  }
 }
 
 .logo {
+margin-bottom: 20px;
   width: 100px;
   height: 100px;
   background: url("../img/logo.png");

@@ -2,6 +2,7 @@ import { IAuthRequisites } from "@Shared/types";
 import { Router, Request, Response, NextFunction } from "express";
 import { verifyRequisites } from "../models/auth.model";
 
+
  export const authRouter = Router();
 
 const throwServerError = (res: Response, e: Error) => {
@@ -9,6 +10,12 @@ const throwServerError = (res: Response, e: Error) => {
   res.status(500);
   res.send("Something went wrong");
 };
+
+declare module "express-session" {
+  export interface SessionData {
+    username: string;
+  }
+}
 
 export const validateSession = (
   req: Request,

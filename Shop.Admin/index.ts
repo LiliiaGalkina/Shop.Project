@@ -11,7 +11,7 @@ export default function (): Express {
 	
 	  app.use(
       session({
-        secret: "abcde",
+        secret: process.env.SESSION_SECRET,
         saveUninitialized: false,
         resave: false,
       })
