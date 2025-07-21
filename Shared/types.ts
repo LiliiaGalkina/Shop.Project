@@ -25,4 +25,14 @@ export interface IProductImage {
 	main: boolean;
 }
 
+export interface IProductFilterPayload {
+	title?: string;
+	description?: string;
+	priceFrom?: number;
+	priceTo?: number;
+}
 
+ export interface IAuthRequisites {
+   username: string;
+   password: string;
+ }   

@@ -10,7 +10,7 @@ export interface ICommentEntity extends RowDataPacket {
 }
 
 export type CommentCreatePayload = Omit<IComment, "id">;
- import { IComment, IProduct, IProductImage } from "@Shared/types";
+ import { IAuthRequisites, IComment, IProduct, IProductFilterPayload, IProductImage } from "@Shared/types";
 
 
   export interface IProductEntity extends IProduct, RowDataPacket {
@@ -36,6 +36,8 @@ export interface IProductImageEntity extends RowDataPacket {
 	main: number;
 }
 
+export interface IProductSearchFilter extends IProductFilterPayload {}
+
 export type ImageCreatePayload = Omit<IProductImage, "id" | "productId">;
 
 export interface ProductAddImagesPayload {
@@ -47,4 +49,9 @@ export type ImagesRemovePayload = string[];
 
 
 export { IComment, IProduct, IProductImage };
-//
+
+	  export interface IUserRequisitesEntity
+      extends IAuthRequisites,
+        RowDataPacket {
+      id: number;
+    } 
