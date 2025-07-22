@@ -27,9 +27,9 @@ export async function getProduct(id: string): Promise<IProduct | null> {
   }
 }
 
-export async function removeProduct(id: string): Promise<void> {
-  await axios.delete(`${API_HOST}/products/${id}`);
-}
+ export async function removeProduct(id: string): Promise<void> {
+   await axios.delete(`${API_HOST}/products/${id}`);
+ }
 
 function splitNewImages(str = ""): string[] {
   return str
@@ -46,16 +46,14 @@ function compileIdsToRemove(data: string | string[]): string[] {
 export async function updateProduct(
   productId: string,
   formData: IProductEditData
-): Promise<IProduct | null> {
+): Promise<void> {
   try {
-    // запрашиваем у Products API товар до всех изменений
-    const { data: currentProduct } = await axios.get<IProduct>(
+     const { data: currentProduct } = await axios.get<IProduct>(
       `${API_HOST}/products/${productId}`
     );
 
     if (formData.commentsToRemove) {
-      // используйте Comments API "delete" метод
-      const commentsIdsToRemove = compileIdsToRemove(formData.commentsToRemove);
+          const commentsIdsToRemove = compileIdsToRemove(formData.commentsToRemove);
       const getDeleteCommentActions = () =>
         commentsIdsToRemove.map((commentId) => {
           return axios.delete(`${API_HOST}/comments/${commentId}`);
@@ -64,15 +62,12 @@ export async function updateProduct(
     }
 
     if (formData.imagesToRemove) {
-		// используйте Products API "remove-images" метод
 		 const imagesIdsToRemove = compileIdsToRemove(formData.imagesToRemove);
       await axios.post(`${API_HOST}/products/remove-images`, imagesIdsToRemove);
     }
     
     if (formData.newImages) {
-      // превратите строку newImages в массив строк, разделитель это перенос строки или запятая
-		// для добавления изображений используйте Products API "add-images" метод
-		const urls = splitNewImages(formData.newImages);
+      	const urls = splitNewImages(formData.newImages);
 		const images = urls.map((url) => ({ url, main: false }));
 		  if (!currentProduct.thumbnail) {
         images[0].main = true;
@@ -84,24 +79,17 @@ export async function updateProduct(
       formData.mainImage &&
       formData.mainImage !== currentProduct?.thumbnail?.id
     ) {
-      // если при редактировании товара было выбрано другое изображение для обложки,
-		// то нужно обратиться к Products API "update-thumbnail" методу
-		await axios.post(`${API_HOST}/products/update-thumbnail/${productId}`, {
+     await axios.post(`${API_HOST}/products/update-thumbnail/${productId}`, {
       newThumbnailId: formData.mainImage,
     });
     }
 
-    // обращаемся к Products API методу PATCH для обновления всех полей, которые есть в форме
-	  // в ответ получаем обновленный товар и возвращаем его из этой функции
 	   await axios.patch(`${API_HOST}/products/${productId}`, {
        title: formData.title,
        description: formData.description,
        price: Number(formData.price),
      });
-
-    // временно возвращаем неизмененный товар, пока все предыдущие этапы не будут реализованы
-    return currentProduct;
   } catch (e) {
-    console.log(e); // фиксируем ошибки, которые могли возникнуть в процессе
+    console.log(e); 
   }
 }

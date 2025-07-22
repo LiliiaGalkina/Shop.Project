@@ -65,17 +65,17 @@ productsRouter.get(
   }
 );
 
-productsRouter.get(
-  "remove-product/:id",
-  async (req: Request<{ id: string }>, res: Response) => {
-    try {
-      await removeProduct(req.params.id);
-      res.redirect(`/${process.env.ADMIN_PATH}`);
-    } catch (e) {
-      throwServerError(res, e);
-    }
-  }
-);
+    productsRouter.get(
+      "/remove-product/:id",
+      async (req: Request<{ id: string }>, res: Response) => {
+        try {
+          await removeProduct(req.params.id);
+          res.redirect(`/${process.env.ADMIN_PATH}`);
+        } catch (e) {
+          throwServerError(res, e);
+        }
+      }
+    );
 
     productsRouter.post(
       "/save/:id",
@@ -84,8 +84,8 @@ productsRouter.get(
         res: Response
       ) => {
         try {
-          const updatedProduct = await updateProduct(req.params.id, req.body);
-          res.send("OK");
+          await updateProduct(req.params.id, req.body);
+           res.redirect(`/${process.env.ADMIN_PATH}/${req.params.id}`);
         } catch (e) {
           throwServerError(res, e);
         }
