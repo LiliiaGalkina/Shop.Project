@@ -68,7 +68,12 @@ productsRouter.get(
     productsRouter.get(
       "/remove-product/:id",
       async (req: Request<{ id: string }>, res: Response) => {
-        try {
+		  try {
+			  if (req.session.username !== "manager") {
+          res.status(403);
+          res.send("Forbidden");
+          return;
+        }
           await removeProduct(req.params.id);
           res.redirect(`/${process.env.ADMIN_PATH}`);
         } catch (e) {
