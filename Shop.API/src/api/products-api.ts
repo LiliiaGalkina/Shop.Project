@@ -8,6 +8,9 @@ import {
   IProductSearchFilter,
   ProductAddImagesPayload,
   ProductCreatePayload,
+	AddSimilarProductsPayload,
+	ISimilarProductEntity,
+  
 } from "../../types";
 import { connection } from "../..";
 import {
@@ -19,16 +22,20 @@ import {
   enhanceProductsComments,
   enhanceProductsImages,
   getProductsFilterQuery,
+  validateAddSimilarProductsBody,
+  validateRemoveSimilarProductsBody,
 } from "../helpers";
-import { OkPacket, ResultSetHeader } from "mysql2";
+import {ResultSetHeader } from "mysql2";
 import {
   DELETE_IMAGES_QUERY,
+  DELETE_SIMILAR_PRODUCTS,
   INSERT_PRODUCT_IMAGES_QUERY,
   INSERT_PRODUCT_QUERY,
   REPLACE_PRODUCT_THUMBNAIL,
   UPDATE_PRODUCT_FIELDS,
 } from "../services/queries";
 import { uuid } from "uuidv4";
+import { body, param, validationResult } from "express-validator";
 
 export const productsRouter = Router();
 
@@ -163,8 +170,14 @@ productsRouter.post(
         ]);
       }
 
+	 const [rows] = await connection.query<IProductEntity[]>(
+     "SELECT * FROM products WHERE product_id = ?",
+     [productId]
+   );
+
+   const product = mapProductsEntity(rows)[0];
       res.status(201);
-      res.send(`Product id:${productId} has been added!`);
+      res.send(product);
     } catch (e) {
       throwServerError(res, e);
     }
@@ -363,6 +376,100 @@ productsRouter.patch(
 
       res.status(200);
       res.send(`Product id:${id} has been added!`);
+    } catch (e) {
+      throwServerError(res, e);
+    }
+  }
+);
+
+productsRouter.get(
+  "/similar/:id",
+  [param("id").isUUID().withMessage("Product id is not UUID")],
+  async (req: Request<{ id: string }>, res: Response) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const originProduct = req.params.id;
+
+      const [rows] = await connection.query<ISimilarProductEntity[]>(
+        "SELECT * FROM similar_products WHERE first_product = ? OR second_product = ?",
+        [originProduct, originProduct]
+      );
+
+      if (!rows?.length) {
+        return res.send([]);
+      }
+
+      const similarProductsIds = rows.map(
+        ({ first_product, second_product }) => {
+          return first_product === originProduct
+            ? second_product
+            : first_product;
+        }
+      );
+
+      const [similarProducts] = await connection.query<IProductEntity[]>(
+        "SELECT * FROM products WHERE product_id IN (?)",
+        [similarProductsIds]
+      );
+
+      const productsList: IProduct[] = similarProducts.map(
+        ({ product_id, ...rest }) => {
+          return {
+            id: product_id,
+            ...rest,
+          };
+        }
+      );
+
+      res.send(productsList);
+    } catch (e) {
+      throwServerError(res, e);
+    }
+  }
+);
+
+productsRouter.post(
+  "/add-similar",
+  [body().custom(validateAddSimilarProductsBody)],
+  async (req: Request<{}, {}, AddSimilarProductsPayload>, res: Response) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      await connection.query<ResultSetHeader>(
+        "INSERT INTO similar_products (first_product, second_product) VALUES ?",
+        [req.body]
+      );
+
+      res.status(201).send();
+    } catch (e) {
+      throwServerError(res, e);
+    }
+  }
+);
+
+productsRouter.post(
+  "/remove-similar",
+  [body().custom(validateRemoveSimilarProductsBody)],
+  async (req: Request<{}, {}, string[]>, res: Response) => {
+    try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const [info] = await connection.query<ResultSetHeader>(DELETE_SIMILAR_PRODUCTS, [
+        req.body,
+        req.body,
+      ]);
+
+      res.send(`${info.affectedRows} rows have been removed`);
     } catch (e) {
       throwServerError(res, e);
     }

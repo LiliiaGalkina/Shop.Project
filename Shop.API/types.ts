@@ -54,4 +54,13 @@ export { IComment, IProduct, IProductImage };
       extends IAuthRequisites,
         RowDataPacket {
       id: number;
-    } 
+} 
+	
+	export type AddSimilarProductsPayload = [string, string][];
+
+  export interface ISimilarProductEntity extends RowDataPacket {
+    id: number;
+    first_product: string;
+    second_product: string;
+  }
+

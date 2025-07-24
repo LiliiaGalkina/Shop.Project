@@ -12,13 +12,23 @@
       href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/<%= process.env.ADMIN_PATH %>/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="/<%= process.env.ADMIN_PATH %>/css/style.css"
+    />
   </head>
 
   <body>
     <header class="header">
       <div class="logo"></div>
-	   <a href="<%= `/${process.env.ADMIN_PATH}/auth/logout` %>">LOGOUT</a>
+      <div class="header-controls">
+        <% if (!location.includes("/login")) { %>
+        <a href="<%= `/${process.env.ADMIN_PATH}/new-product` %>">
+          ADD PRODUCT
+        </a>
+        <% } %>
+        <a href="<%= `/${process.env.ADMIN_PATH}/auth/logout` %>">LOGOUT</a>
+      </div>
     </header>
     <div class="container"><%- body %></div>
   </body>

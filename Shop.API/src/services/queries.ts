@@ -46,3 +46,9 @@ export const UPDATE_PRODUCT_FIELDS = `
     SET title = ?, description = ?, price = ? 
     WHERE product_id = ?
 `;
+
+export const DELETE_SIMILAR_PRODUCTS = `
+  DELETE FROM similar_products 
+  WHERE first_product IN (?)
+  OR second_product IN (?);
+`;

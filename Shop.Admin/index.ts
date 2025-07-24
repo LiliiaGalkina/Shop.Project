@@ -1,7 +1,6 @@
- import express, { Express } from "express";
+ import express, { Express, NextFunction, Request, Response } from "express";
 import { productsRouter } from "./controllers/products.controller";
  import bodyParser from "body-parser";
-
 import layouts from "express-ejs-layouts"
 import { authRouter, validateSession } from "./controllers/auth.controller";
 import session from "express-session";
@@ -24,6 +23,12 @@ export default function (): Express {
         app.set("views", "Shop.Admin/views");
 
 	app.use(layouts);
+
+
+	app.use((req: Request, res: Response, next: NextFunction) => {
+    res.locals.location = req.headers.host + req.originalUrl;
+    next();
+  });
 
 	app.use(express.static(__dirname + "/public"));
 	

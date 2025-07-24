@@ -35,4 +35,6 @@ export interface IProductFilterPayload {
  export interface IAuthRequisites {
    username: string;
    password: string;
- }   
+}   
+ 
+ export type SimilarProduct = Pick<IProduct, "id" | "title" | "price">;

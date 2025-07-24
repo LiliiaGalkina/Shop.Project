@@ -1,5 +1,7 @@
-import { CommentCreatePayload, IComment, ICommentEntity, IProduct, IProductImage, IProductImageEntity, IProductSearchFilter } from "../types";
+import { AddSimilarProductsPayload, CommentCreatePayload, IComment, ICommentEntity, IProduct, IProductImage, IProductImageEntity, IProductSearchFilter } from "../types";
 import { mapCommentEntity, mapImageEntity } from "./services/mapping";
+import { isUUID } from "validator";
+
 
 type CommentValidator = (comment: CommentCreatePayload) => string | null;
 
@@ -116,10 +118,7 @@ export const checkCommentUniq = (
    return [query, values];
 };
  
-//hw
- /**
- * Задание 34.10 – хелпер для сопоставления изображений и комментариев по productId
- */
+
 export const enhanceProductsImages = (
   products: IProduct[],
   imageRows: IProductImageEntity[]
@@ -155,3 +154,66 @@ export const enhanceProductsImages = (
 
   return products;
 }
+
+export const validateAddSimilarProductsBody = (
+  items: AddSimilarProductsPayload = []
+): boolean => {
+  if (!Array.isArray(items)) {
+    throw new Error("Request body is not an array");
+  }
+
+  if (!items.length) {
+    throw new Error("An array is empty");
+  }
+
+  items?.forEach((connection: [string, string], index) => {
+    if (
+      connection?.length !== 2 ||
+      typeof connection?.[0] !== "string" ||
+      typeof connection?.[1] !== "string"
+    ) {
+      throw new Error(
+        `An array element with index ${index} doesn't match a pair of ids`
+      );
+    }
+
+    if (!isUUID(connection[0])) {
+      throw new Error(
+        `Value ${connection[0]} of the element with index ${index} is not UUID`
+      );
+    }
+
+    if (!isUUID(connection[1])) {
+      throw new Error(
+        `Value ${connection[1]} of the element with index ${index} is not UUID`
+      );
+    }
+  });
+
+  return true;
+};
+
+export const validateRemoveSimilarProductsBody = (
+  items: string[] = []
+): boolean => {
+  if (!Array.isArray(items)) {
+    throw new Error("Request body is not an array");
+  }
+
+  if (!items.length) {
+    throw new Error("An array is empty");
+  }
+
+  items?.forEach((id: string, index) => {
+    if (!isUUID(id)) {
+      throw new Error(`Value ${id} with index ${index} is not UUID`);
+    }
+  });
+
+  return true;
+};
+
+function isUUID(id: string) {
+	throw new Error("Function not implemented.");
+}
+
