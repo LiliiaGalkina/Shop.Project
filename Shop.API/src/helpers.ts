@@ -1,6 +1,6 @@
 import { AddSimilarProductsPayload, CommentCreatePayload, IComment, ICommentEntity, IProduct, IProductImage, IProductImageEntity, IProductSearchFilter } from "../types";
 import { mapCommentEntity, mapImageEntity } from "./services/mapping";
-import { isUUID } from "validator";
+
 
 
 type CommentValidator = (comment: CommentCreatePayload) => string | null;
@@ -151,7 +151,6 @@ export const enhanceProductsImages = (
       }
     }
   }
-
   return products;
 }
 
@@ -177,17 +176,6 @@ export const validateAddSimilarProductsBody = (
       );
     }
 
-    if (!isUUID(connection[0])) {
-      throw new Error(
-        `Value ${connection[0]} of the element with index ${index} is not UUID`
-      );
-    }
-
-    if (!isUUID(connection[1])) {
-      throw new Error(
-        `Value ${connection[1]} of the element with index ${index} is not UUID`
-      );
-    }
   });
 
   return true;
@@ -204,13 +192,7 @@ export const validateRemoveSimilarProductsBody = (
     throw new Error("An array is empty");
   }
 
-  items?.forEach((id: string, index) => {
-    if (!isUUID(id)) {
-      throw new Error(`Value ${id} with index ${index} is not UUID`);
-    }
-  });
-
-  return true;
+   return true;
 };
 
 function isUUID(id: string) {

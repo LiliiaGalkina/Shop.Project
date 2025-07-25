@@ -415,6 +415,10 @@ productsRouter.get(
         "SELECT * FROM products WHERE product_id IN (?)",
         [similarProductsIds]
       );
+    
+		//tdo
+
+		console.log(similarProducts);
 
       const productsList: IProduct[] = similarProducts.map(
         ({ product_id, ...rest }) => {

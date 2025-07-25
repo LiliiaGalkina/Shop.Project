@@ -71,15 +71,17 @@ productsRouter.get(
   async (req: Request<{ id: string }>, res: Response) => {
     try {
       const product = await getProduct(req.params.id);
-		if (product) {
-		  const similarProducts = await getSimilarProducts(req.params.id);
-      const notSimilarProducts = await getNotSimilarProducts(
-        req.params.id,
-        similarProducts
-      );
+      if (product) {
+        const similarProducts = await getSimilarProducts(req.params.id);
+        const notSimilarProducts = await getNotSimilarProducts(
+          req.params.id,
+          similarProducts
+        );
 
         res.render("product/product", {
-          item: product,
+			item: product,
+			similarProducts,
+			notSimilarProducts
         });
       } else {
         res.render("product/empty-product", {
@@ -132,5 +134,3 @@ productsRouter.post(
     }
   }
 );
-
-

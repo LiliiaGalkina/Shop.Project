@@ -146,3 +146,23 @@ margin-bottom: 20px;
 .product-edit-footer {
   margin-top: 60px;
 }
+
+.product-edit-footer a,
+.product-edit-footer button {
+	padding: 5px;
+	text-decoration: none;
+	color: #000000;
+	border: 1px solid #000000;
+	border-radius: 5px;
+}
+
+.product-edit-similar {
+	margin-bottom: 50px;
+	display: flex;
+	gap: 50px
+}
+
+.not-similar-selector {
+	margin-top: 15px;
+	width: 200px;
+}
