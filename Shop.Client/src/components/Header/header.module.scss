@@ -1,0 +1,28 @@
+.header {
+  padding: 2rem 1.5rem;
+  background-color: #eff7fa;
+
+  .items {
+	display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .logo {
+    margin-right: 1rem;
+	max-width: 8rem;
+
+	img {
+		width: 100%;
+	}
+  }
+
+  .title {
+	margin-left: -9rem;
+    width: 100%;
+    font-size: 4rem;
+    font-weight: 600;
+    color: #3a7ace;
+    text-align: center;
+  }
+}
