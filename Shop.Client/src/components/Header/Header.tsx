@@ -1,4 +1,5 @@
 import style from "./header.module.scss";
+import logo from "./logo.png"
 
 export default function Header() {
   return (
@@ -6,7 +7,7 @@ export default function Header() {
       <div className="container">
         <div className={style.items}>
           <div className={style.logo}>
-            <img src="../../public/logo.png" alt="logo" />
+            <img src={logo} alt="logo" />
           </div>
           <h2 className={style.title}>Shop Project</h2>
         </div>

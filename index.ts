@@ -17,7 +17,7 @@ async function launchApplication() {
 	initRouter();
 	
 	  server.get('/', (_, res) => {
-    res.sendFile(path.join(__dirname, './Shop.Client', 'index.html'));
+    res.sendFile(path.join(__dirname, './Shop.Client/dist', 'index.html'));
   });
 
 }
@@ -29,7 +29,7 @@ function initRouter() {
 	 const shopAdmin = ShopAdmin();
 	server.use("/admin", shopAdmin);
 	
-	  const reactAppPath = path.join(__dirname, "Shop.Client");
+	  const reactAppPath = path.join(__dirname, "Shop.Client/dist");
     server.use(express.static(reactAppPath));
 
   server.get("/", (_, res) => {

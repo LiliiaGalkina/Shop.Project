@@ -4,9 +4,10 @@ import Header from "../Header/Header";
 import style from "./layout.module.scss";
 
 export default function Layout() {
+
   return (
     <div className={style.wrapper}>
-      <Header />
+	<Header/>
       <Content/>
       <Footer />
     </div>
