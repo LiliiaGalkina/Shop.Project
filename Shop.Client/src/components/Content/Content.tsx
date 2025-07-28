@@ -7,22 +7,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const URL = "http://localhost:3000/api/products";
-let info = {
+
+let info: InfoProducts = {
   count: 0,
   sum: 0,
+  items: [],
 };
-
 export interface ComponentProps {
   infoProducts: InfoProducts;
 }
 
-export interface ItemsProps {
-	productItems: IProduct[];
-}
-
 export default function Content() {
-	const [infoProducts, setInfoProducts] = useState(info);
-	const [productItems, setProductItems] = useState<IProduct[]>([]);
+  const [infoProducts, setInfoProducts] = useState(info);
 
   async function getProducts() {
     const dataProduct: IProduct[] = await axios
@@ -33,22 +29,26 @@ export default function Content() {
     info = {
       count: productsCount,
       sum: producSum,
-	  };
-	setProductItems(dataProduct)
+      items: dataProduct,
+    };
     setInfoProducts(info);
   }
 
   useEffect(() => {
     getProducts();
-  }, [info]);	
-	
+  }, []);
+
   return (
     <BrowserRouter>
+      {" "}
       <Routes>
-        <Route path={"/"} element={<Home infoProducts = {infoProducts} />} />
-        <Route path={"/product-list"} element={<ProductList productItems={productItems} />} />
+        <Route path={"/"} element={<Home infoProducts={infoProducts} />} />{" "}
+        <Route
+          path={"/product-list"}
+          element={<ProductList infoProducts={infoProducts} />}
+        />{" "}
         <Route path={"/:id"} element={<Product />} />
-      </Routes>
+      </Routes>{" "}
     </BrowserRouter>
   );
 }

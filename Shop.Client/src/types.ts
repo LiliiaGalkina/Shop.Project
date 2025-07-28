@@ -41,5 +41,6 @@ export type SimilarProduct = Pick<IProduct, "id" | "title" | "price">;
  
 export type InfoProducts = {
 	count: number,
-	sum: number
+	sum: number,
+	items: IProduct[]
  }
