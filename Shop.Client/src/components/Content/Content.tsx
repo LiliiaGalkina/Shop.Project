@@ -2,30 +2,34 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../Home/Home";
 import ProductList from "../ProductList/ProductList";
 import Product from "../Product/Product";
-import {  IProduct } from "@/types";
+import { IProduct } from "@/types";
 import axios from "axios";
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const URL = "http://localhost:3000/api/products";
 
-
-
 export interface ComponentProps {
   products: IProduct[];
-  setProducts: (value: any) => void;
+	isLoaded?: boolean;
 }
 
 export default function Content() {
-  const [products, setProducts] = useState<IProduct[]>([]);
+	const [products, setProducts] = useState<IProduct[]>([]);
+	const [isLoaded, setIsLoaded] = useState(false)
 
   async function getProducts() {
-    const dataProduct = await axios
-      .get(URL)
-		  .then((res) => res.data);
-    setProducts(dataProduct);
+    try {
+      const dataProduct = await axios.get(URL).then((res) => res.data);
+      setProducts(dataProduct);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  useEffect(() => {
+	useEffect(() => {
+	   setTimeout(() => {
+       setIsLoaded(true);
+     }, 3000);
     getProducts();
   }, []);
 
@@ -34,12 +38,12 @@ export default function Content() {
       <Routes>
         <Route
           path={"/"}
-          element={<Home products={products} setProducts={setProducts} />}
+          element={<Home products={products} />}
         />
         <Route
           path={"/product-list"}
           element={
-            <ProductList products={products} setProducts={setProducts} />
+			  <ProductList products={products} isLoaded={isLoaded} />
           }
         />
         <Route path={"/:id"} element={<Product />} />

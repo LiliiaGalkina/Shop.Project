@@ -3,7 +3,7 @@ import { ComponentProps } from "../Content/Content";
 import style from "./productlist.module.scss";
 import placheholder from "../product-placeholder.png";
 
-const ProductList: FunctionComponent<ComponentProps> = ({ products}) => {
+const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) => {
   const [name, setName] = useState("");
   const [minPrice, setMinPrice] = useState("");
 	const [maxPrice, setMaxPrice] = useState("");
@@ -131,16 +131,19 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products}) => {
             </button>
           </div>
         </section>
-        <section>
-          <h2 className={style.title}>
-            Список товаров (<span>{productList.length}</span>)
-          </h2>
-          <div className={style.noproduct}>
-            {productsCard.length === 0 &&
-              "По вашему запросу ничего не найдено."}
-          </div>
-          <div className={style.items}>{productsCard}</div>
-        </section>
+        <div className={style.loader}>{!isLoaded && "Загрузка данных..."}</div>
+        {isLoaded && (
+          <section>
+            <h2 className={style.title}>
+              Список товаров (<span>{productList.length}</span>)
+            </h2>
+            <div className={style.noproduct}>
+              {productsCard.length === 0 &&
+                "По вашему запросу ничего не найдено."}
+            </div>
+            <div className={style.items}>{productsCard}</div>
+          </section>
+        )}
       </div>
     </main>
   );
