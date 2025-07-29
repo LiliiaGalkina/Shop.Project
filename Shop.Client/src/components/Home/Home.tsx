@@ -5,14 +5,16 @@ import { FunctionComponent } from "react";
 
 
 
-const Home: FunctionComponent<ComponentProps> = ({ infoProducts }) => {
+const Home: FunctionComponent<ComponentProps> = ({ products }) => {
+	const count = products.length;
+	const sumPrice = products.reduce((sum, item) => sum + +item.price, 0)
   return (
     <main className={style.main}>
       <div className={style.items}>
         <h1 className={style.title}>Shop.Client</h1>
         <p className={style.text}>
-          В базе данных находится <span>{infoProducts.count}</span> товаров общей стоимостью
-          <span>{infoProducts.sum}</span> рублей.
+          В базе данных находится <span>{count}</span> товаров общей стоимостью
+          <span>{sumPrice}</span> рублей.
         </p>
         <div className={style.buttons}>
           <Link to="/product-list" className={style.button}>
