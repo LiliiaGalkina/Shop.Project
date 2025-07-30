@@ -6,7 +6,7 @@ import { IProduct } from "@/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const URL = "http://localhost:3000/api/products";
+ export const URL = "http://localhost:3000/api/products";
 
 export interface ComponentProps {
   products: IProduct[];

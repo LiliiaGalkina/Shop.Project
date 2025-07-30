@@ -2,6 +2,7 @@ import { FunctionComponent, useState } from "react";
 import { ComponentProps } from "../Content/Content";
 import style from "./productlist.module.scss";
 import placheholder from "../product-placeholder.png";
+import { Link } from "react-router-dom";
 
 const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) => {
   const [name, setName] = useState("");
@@ -66,14 +67,16 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) =
 	}
 
 	const productsCard = productList.map((item) => (
-    <div key={item.id} className={style.item}>
+    <Link key={item.id} className={style.item} to={`/${item.id}`}>
       <div className={style.image}>
         <img
           src={item.thumbnail ? item.thumbnail.url : placheholder}
           alt="фото товара"
         />
       </div>
-      <h3 className={style.itemtitle}>{item.title}</h3>
+      <h3 className={style.itemtitle}>
+        {item.title}
+      </h3>
       <p className={style.price}>
         <span>{item.price}</span> руб.
       </p>
@@ -81,7 +84,7 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) =
         Всего комментариев:
         <span>{item.comments ? item.comments.length : 0}</span>
       </p>
-    </div>
+    </Link>
   ));
 
   return (
