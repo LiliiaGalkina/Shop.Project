@@ -109,3 +109,16 @@ main {
 	font-weight: 600;
 }
 
+.button {
+	padding: 0.5rem 1rem;
+	border: 0.1rem solid #0b0ba7;
+	border-radius: 1rem;
+	background-color: #eff7fa;
+	font-size: 2.4rem;
+	color:#0b0ba7;
+	transition: all 1s ease;
+
+	&:hover {
+	box-shadow: 0 0 1rem #0b0ba7;
+	}
+}

@@ -65,7 +65,7 @@ export default function Product() {
             Цена <span>{product.price} руб.</span>
           </div>
           <h3 className={style.subtitle}>
-            {product.similarProducts && "Похожие товары"}
+            {product.similarProducts && product.similarProducts.length > 0 && "Похожие товары"}
           </h3>
           <div className={style.similars}>{similars}</div>
 
@@ -73,7 +73,8 @@ export default function Product() {
             {product.comments && "Комметарии:"}
           </h3>
           <div className={style.comments}>{comments}</div>
-        </div>
+				</div>
+				<Link to={"/product-list"} className={style.button}>Вернуться в каталог</Link>
       </div>
     </main>
   );

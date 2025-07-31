@@ -4,7 +4,7 @@ import style from "./productlist.module.scss";
 import placheholder from "../product-placeholder.png";
 import { Link } from "react-router-dom";
 
-const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) => {
+const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, isError}) => {
   const [name, setName] = useState("");
   const [minPrice, setMinPrice] = useState("");
 	const [maxPrice, setMaxPrice] = useState("");
@@ -134,8 +134,9 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoaded}) =
             </button>
           </div>
         </section>
-        <div className={style.loader}>{!isLoaded && "Загрузка данных..."}</div>
-        {isLoaded && (
+			  <div className={style.loader}>{isLoader && "Загрузка данных..."}</div>
+			  <div className={style.error}>{isError && "Ошибка загрузки данных. Вернитесь на главную страницу."} </div>
+        {!isLoader && !isError && (
           <section>
             <h2 className={style.title}>
               Список товаров (<span>{productList.length}</span>)
