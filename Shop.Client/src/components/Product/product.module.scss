@@ -53,7 +53,7 @@ main {
 	}
 }
 
-.commentstitle {
+.subtitle {
 	margin-bottom: 3rem;
 	font-size: 4rem;
 	line-height: 120%;
@@ -82,3 +82,30 @@ main {
 .commenttext {
 	font-style: italic;
 }
+
+.similars {
+	margin-bottom: 4rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-self: start;
+}
+
+.similar {
+	display: flex;
+	align-items: center;
+	color:#000000;
+	font-size: 2.8rem;
+	line-height: 110%;
+	cursor: pointer;
+	transition: all 0.5s ease;
+	&:hover {
+		box-shadow: 0 0.4rem 0.5rem -0.4rem #000000;
+	}
+}
+
+.similartitle {
+	margin-right: 2rem;
+	font-weight: 600;
+}
+

@@ -14,7 +14,9 @@ export interface IComment {
     price: number;
     comments?: IComment[];
     images?: IProductImage[];
-	  thumbnail?: IProductImage;
+    thumbnail?: IProductImage;
+    similarProducts?: IProduct[];
+    notSimilarProducts?: IProduct[];
   }
 
 

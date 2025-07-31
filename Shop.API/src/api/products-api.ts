@@ -124,8 +124,9 @@ productsRouter.get(
       const [images] = await connection.query<IProductImageEntity[]>(
         "SELECT * FROM images WHERE product_id = ?",
         [req.params.id]
-      );
-
+		);
+		
+		
       const product = mapProductsEntity(rows)[0];
 
       if (comments.length) {
@@ -136,8 +137,7 @@ productsRouter.get(
         product.images = mapImagesEntity(images);
         product.thumbnail =
           product.images.find((image) => image.main) || product.images[0];
-      }
-
+		}
       res.send(product);
     } catch (e) {
       throwServerError(res, e);
