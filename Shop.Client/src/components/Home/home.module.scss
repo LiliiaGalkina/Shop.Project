@@ -32,6 +32,7 @@
 .buttons {
   width: 100%;
   display: flex;
+  gap: 2rem;
   justify-content: center;
 }
 
@@ -49,8 +50,30 @@
 		background-color: #0b0ba7;
 		color: #eff7fa;
 	}
+}
 
-	&:first-child {
-		margin-right: 2rem;
+@media (max-width: 768px) {
+	.title {
+		margin-bottom: 6rem;
+		font-size: 6rem;
+	}
+
+	.text {
+		font-size: 2.4rem;
+	}
+
+	.buttons {
+		flex-direction: column;
+	}
+}
+
+@media (max-width: 480px) {
+	.title {
+		margin-bottom: 4rem;
+		font-size: 4.2rem;
+	}
+
+	.button {
+		font-size: 2.6rem;
 	}
 }

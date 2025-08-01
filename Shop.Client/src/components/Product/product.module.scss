@@ -1,124 +1,146 @@
 main {
-	padding: 5rem 0;
+  padding: 5rem 0;
 }
 
 .items {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
-	margin-bottom: 3rem;
-	font-size: 4rem;
-	line-height: 120%;
-	font-weight: 700;
-	color: #0b0ba7;
+  margin-bottom: 3rem;
+  font-size: 4rem;
+  line-height: 120%;
+  font-weight: 700;
+  color: #0b0ba7;
 }
 
 .mainimg {
-	margin-bottom: 5rem;
-	width: 30rem;
-	img {
-		width: 100%;
-	}
+  margin-bottom: 5rem;
+  width: 30rem;
+  img {
+    width: 100%;
+  }
 }
 
 .images {
-	display: flex;
-	gap: 2rem;
-	justify-content: space-between;
-	align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .image {
-	margin-bottom: 4rem;
-	width: 25rem;
-	img {
-		width: 100%;
-	}
+  margin-bottom: 4rem;
+  width: 25rem;
+  img {
+    width: 100%;
+  }
 }
 
 .description {
-	margin-bottom: 4rem;
-	font-size: 3.6rem;
-	line-height: 120%;
+  margin-bottom: 4rem;
+  font-size: 3.6rem;
+  line-height: 120%;
 }
 
 .price {
-	margin-bottom: 4rem;
-	font-size: 3.6rem;
-	span {
-		font-weight: 700;
-	}
+  margin-bottom: 5rem;
+  font-size: 3.6rem;
+  span {
+    font-weight: 700;
+  }
 }
 
 .subtitle {
-	margin-bottom: 3rem;
-	font-size: 4rem;
-	line-height: 120%;
-	font-weight: 600;
-	align-self: start;
+  margin-bottom: 3rem;
+  font-size: 4rem;
+  line-height: 120%;
+  font-weight: 600;
+  align-self: start;
 }
 
 .comments {
-	display: flex;
-	flex-direction: column;
-	gap: 3.6rem;
-	font-size: 2.4rem;
-	line-height: 120%;
+  display: flex;
+  flex-direction: column;
+  gap: 3.6rem;
+  font-size: 2.4rem;
+  line-height: 120%;
 }
 
 .commentname {
-	margin-bottom: 2rem;
-	font-size: 2.8rem;
-	font-weight: 600;
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  font-weight: 600;
 }
 
 .mail {
-	margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .commenttext {
-	font-style: italic;
+  font-style: italic;
 }
 
 .similars {
-	margin-bottom: 4rem;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	align-self: start;
+  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-self: start;
 }
 
 .similar {
-	display: flex;
-	align-items: center;
-	color:#000000;
-	font-size: 2.8rem;
-	line-height: 110%;
-	cursor: pointer;
-	transition: all 0.5s ease;
-	&:hover {
-		box-shadow: 0 0.4rem 0.5rem -0.4rem #000000;
-	}
+  display: flex;
+  align-items: center;
+  color: #000000;
+  font-size: 2.8rem;
+  line-height: 110%;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    box-shadow: 0 0.4rem 0.5rem -0.4rem #000000;
+  }
 }
 
 .similartitle {
-	margin-right: 2rem;
-	font-weight: 600;
+  margin-right: 2rem;
+  font-weight: 600;
 }
 
 .button {
-	padding: 0.5rem 1rem;
-	border: 0.1rem solid #0b0ba7;
-	border-radius: 1rem;
-	background-color: #eff7fa;
-	font-size: 2.4rem;
-	color:#0b0ba7;
-	transition: all 1s ease;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid #0b0ba7;
+  border-radius: 1rem;
+  background-color: #eff7fa;
+  font-size: 2.4rem;
+  color: #0b0ba7;
+  transition: all 1s ease;
 
-	&:hover {
-	box-shadow: 0 0 1rem #0b0ba7;
+  &:hover {
+    box-shadow: 0 0 1rem #0b0ba7;
+  }
+}
+
+@media (max-width: 768px) {
+	.description {
+		font-size: 2.6rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.price {
+		font-size: 3rem;
+	}
+
+	.subtitle {
+		font-size: 3rem;
+	}
+
+	.similar {
+		font-size: 2.6rem;
 	}
 }

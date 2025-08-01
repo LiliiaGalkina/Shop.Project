@@ -1,137 +1,181 @@
 .main {
-	padding: 5rem 0;
+  padding: 5rem 0;
 }
 
 .title {
-	margin-bottom: 6rem;
-	font-size: 5rem;
-	font-weight: 700;
-	text-align: center;
-	span {
-	color: #0b0ba7;
-	}
+  margin-bottom: 6rem;
+  font-size: 5rem;
+  font-weight: 700;
+  text-align: center;
+  span {
+    color: #0b0ba7;
+  }
 }
 
 .filterblock {
-	margin-bottom: 10rem;
+  margin-bottom: 10rem;
 }
 
 .filters {
-	margin-bottom: 4rem;
-	display: flex;
-	justify-content: center;
-	font-size: 2.4rem;
-	line-height: 120%;
-	gap: 4rem;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  font-size: 2.4rem;
+  line-height: 120%;
+  gap: 4rem;
 }
 
 .filtertitile {
-	margin-bottom: 1rem;
-	font-size: 2.6rem;
-	font-weight: 600;
-	text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2.6rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 .filterinput {
-	padding: 0.5rem 1rem;
-	font-size: 2.4rem;
-	border: 0.1rem solid #000000;
-	border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 2.4rem;
+  border: 0.1rem solid #000000;
+  border-radius: 1rem;
 }
 
 .doubleinputs {
-display: flex;
-align-items: center;
-gap: 1rem;
-
-.filterinput {
-	max-width: 20rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
+
+.doubleinput {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .filterinput {
+    max-width: 20rem;
+  }
 }
 
 .buttons {
-	display: flex;
-	justify-content: center;
-	gap: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .button {
-	padding: 0.5rem 1rem;
-	border: 0.1rem solid #0b0ba7;
-	border-radius: 1rem;
-	background-color: #eff7fa;
-	font-size: 2.4rem;
-	color:#0b0ba7;
-	transition: all 1s ease;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid #0b0ba7;
+  border-radius: 1rem;
+  background-color: #eff7fa;
+  font-size: 2.4rem;
+  color: #0b0ba7;
+  transition: all 1s ease;
 
-	&:hover {
-	box-shadow: 0 0 1rem #0b0ba7;
-	}
+  &:hover {
+    box-shadow: 0 0 1rem #0b0ba7;
+  }
 }
 
 .loader {
-	font-size: 2.8rem;
-	font-weight: 700;
-	color: #0b0ba7;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #0b0ba7;
 }
 
 .noproduct {
-	font-size: 2.8rem;
-	font-weight: 700;
-	color: #991f1f;
-	text-align: center;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #991f1f;
+  text-align: center;
 }
 
+.products {
+  margin-bottom: 3rem;
+}
+
+
 .items {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
-	justify-content: center;
-	gap: 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
+  justify-content: center;
+  gap: 4rem;
 }
 
 .item {
-	padding: 2rem;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border: 0.1rem solid #0b0ba7;
-	border-radius: 1rem;
-	cursor: pointer;
-	transition: all 0.5s ease;
-	&:hover {
-		box-shadow: 0 0 1rem #0b0ba7;
-	}
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0.1rem solid #0b0ba7;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    box-shadow: 0 0 1rem #0b0ba7;
+  }
 }
 
 .image {
-	margin-bottom: 2rem;
-	height: 20rem;
-	overflow: hidden;
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+  margin-bottom: 2rem;
+  height: 20rem;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .itemtitle {
-	margin-bottom: 1.6rem;
-	font-size: 3rem;
-	font-weight: 600;
-	color: #0b0ba7;
+  margin-bottom: 1.6rem;
+  font-size: 3rem;
+  font-weight: 600;
+  color: #0b0ba7;
 }
 
 .price {
-	margin-bottom: 1.6rem;
-	font-size: 2.4rem;
-	span {
-		font-weight: 600;
-	}
+  margin-bottom: 1.6rem;
+  font-size: 2.4rem;
+  span {
+    font-weight: 600;
+  }
 }
 
 .commentscount {
-	font-size: 2.2rem;
-	span {
-		font-weight: 600;
-	}
+  font-size: 2.2rem;
+  span {
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 860px) {
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 530px) {
+  .title {
+    margin-bottom: 5rem;
+    font-size: 4rem;
+  }
+
+  .doubleinputs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 400px) {
+  .title {
+    margin-bottom: 4rem;
+    font-size: 3.2rem;
+  }
+
+  .filterblock {
+    margin-bottom: 8rem;
+  }
+
+  .button {
+    font-size: 2.2rem;
+  }
 }

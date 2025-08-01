@@ -4,69 +4,68 @@ import style from "./productlist.module.scss";
 import placheholder from "../product-placeholder.png";
 import { Link } from "react-router-dom";
 
-const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, isError}) => {
+const ProductList: FunctionComponent<ComponentProps> = ({
+  products,
+  isLoader,
+  isError,
+}) => {
   const [name, setName] = useState("");
   const [minPrice, setMinPrice] = useState("");
-	const [maxPrice, setMaxPrice] = useState("");
-	const [productList, setProductList] = useState(products);
-	
-	
-	let productItems = productList;	
-	
-	const makeFiltered = () =>{
-		if (name) {
-			if (minPrice && maxPrice) {
-				productItems = products.filter(
+  const [maxPrice, setMaxPrice] = useState("");
+  const [productList, setProductList] = useState(products);
+
+  let productItems = productList;
+
+  const makeFiltered = () => {
+    if (name) {
+      if (minPrice && maxPrice) {
+        productItems = products.filter(
           (item) =>
             item.title.toLowerCase().includes(name.toLowerCase()) &&
             item.price > +minPrice &&
             item.price < +maxPrice
         );
-			} else if (minPrice && !maxPrice) {
-				productItems = products.filter(
+      } else if (minPrice && !maxPrice) {
+        productItems = products.filter(
           (item) =>
             item.title.toLowerCase().includes(name.toLowerCase()) &&
             item.price > +minPrice
-        ); 
-			} else if (!minPrice && maxPrice) {
-				productItems = products.filter(
+        );
+      } else if (!minPrice && maxPrice) {
+        productItems = products.filter(
           (item) =>
             item.title.toLowerCase().includes(name.toLowerCase()) &&
             item.price < +maxPrice
-        ); 
-			} else if (!minPrice && !maxPrice) {
-				productItems = products.filter(
-          		(item) => item.title.toLowerCase().includes(name.toLowerCase()))
-			}
-		} else {
-			if (minPrice && maxPrice) {
-				productItems = products.filter(
-          (item) =>
-            item.price > +minPrice &&
-            item.price < +maxPrice)
-			} else if (minPrice && !maxPrice) {
-				productItems = products.filter(
-          (item) => item.price > +minPrice )
-			} else if (!minPrice && maxPrice) {
-				productItems = products.filter(
-          (item) => item.price < +maxPrice
-        )
-			} else {
-				productItems = products;
-			}
-		}
-		setProductList(productItems);
-	}
+        );
+      } else if (!minPrice && !maxPrice) {
+        productItems = products.filter((item) =>
+          item.title.toLowerCase().includes(name.toLowerCase())
+        );
+      }
+    } else {
+      if (minPrice && maxPrice) {
+        productItems = products.filter(
+          (item) => item.price > +minPrice && item.price < +maxPrice
+        );
+      } else if (minPrice && !maxPrice) {
+        productItems = products.filter((item) => item.price > +minPrice);
+      } else if (!minPrice && maxPrice) {
+        productItems = products.filter((item) => item.price < +maxPrice);
+      } else {
+        productItems = products;
+      }
+    }
+    setProductList(productItems);
+  };
 
-	const clearFilter = () => {
-		setName("");
-		setMinPrice("");
-		setMaxPrice("");
-		setProductList(products)
-	
-	}
+  const clearFilter = () => {
+    setName("");
+    setMinPrice("");
+    setMaxPrice("");
+    setProductList(products);
+  };
 
-	const productsCard = productList.map((item) => (
+  const productsCard = productList.map((item) => (
     <Link key={item.id} className={style.item} to={`/${item.id}`}>
       <div className={style.image}>
         <img
@@ -74,9 +73,7 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, is
           alt="фото товара"
         />
       </div>
-      <h3 className={style.itemtitle}>
-        {item.title}
-      </h3>
+      <h3 className={style.itemtitle}>{item.title}</h3>
       <p className={style.price}>
         <span>{item.price}</span> руб.
       </p>
@@ -106,22 +103,26 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, is
             <div className={style.filter}>
               <p className={style.filtertitile}>Цена</p>
               <div className={style.doubleinputs}>
-                <p className={style.doublefiltertext}>от</p>
-                <input
-                  type="text"
-                  placeholder="Цена от"
-                  className={style.filterinput}
-                  value={minPrice}
-                  onChange={(e) => setMinPrice(e.target.value)}
-                />
-                <p className={style.doublefiltertext}>до</p>
-                <input
-                  type="text"
-                  placeholder="Цена до"
-                  className={style.filterinput}
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                />
+                <div className={style.doubleinput}>
+                  <p className={style.doublefiltertext}>от</p>
+                  <input
+                    type="text"
+                    placeholder="Цена от"
+                    className={style.filterinput}
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(e.target.value)}
+                  />
+                </div>
+                <div className={style.doubleinput}>
+                  <p className={style.doublefiltertext}>до</p>
+                  <input
+                    type="text"
+                    placeholder="Цена до"
+                    className={style.filterinput}
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -134,10 +135,12 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, is
             </button>
           </div>
         </section>
-			  <div className={style.loader}>{isLoader && "Загрузка данных..."}</div>
-			  <div className={style.error}>{isError && "Ошибка загрузки данных. Вернитесь на главную страницу."} </div>
+        <div className={style.loader}>{isLoader && "Загрузка данных..."}</div>
+        <div className={style.error}>
+          {isError && "Ошибка загрузки данных. Вернитесь на главную страницу."}{" "}
+        </div>
         {!isLoader && !isError && (
-          <section>
+          <section className={style.products}>
             <h2 className={style.title}>
               Список товаров (<span>{productList.length}</span>)
             </h2>
@@ -148,6 +151,9 @@ const ProductList: FunctionComponent<ComponentProps> = ({ products, isLoader, is
             <div className={style.items}>{productsCard}</div>
           </section>
         )}
+        <Link to={"/"} className={style.button}>
+          Вернуться главную страницу
+        </Link>
       </div>
     </main>
   );

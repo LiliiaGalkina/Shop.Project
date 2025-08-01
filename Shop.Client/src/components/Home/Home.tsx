@@ -13,8 +13,7 @@ const Home: FunctionComponent<ComponentProps> = ({ products }) => {
       <div className={style.items}>
         <h1 className={style.title}>Shop.Client</h1>
         <p className={style.text}>
-          В базе данных находится <span>{count}</span> товаров общей стоимостью
-          <span>{sumPrice}</span> рублей.
+          В базе данных находится <span>{count}</span> товаров общей стоимостью <span>{sumPrice}</span> рублей.
         </p>
         <div className={style.buttons}>
           <Link to="/product-list" className={style.button}>

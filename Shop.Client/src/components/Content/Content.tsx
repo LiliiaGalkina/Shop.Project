@@ -21,18 +21,18 @@ export default function Content() {
 
   async function getProducts() {
     try {
-      setIsLoader(true);
       const dataProduct = await axios.get(URL).then((res) => res.data);
       setProducts(dataProduct);
-      setIsLoader(false);
-	} catch (error) {
-		setIsError(true);
+    } catch (error) {
+      setIsError(true);
       console.log(error);
     }
   }
 
   useEffect(() => {
+    setIsLoader(true);
     getProducts();
+    setIsLoader(false);
   }, []);
 
   return (
@@ -41,9 +41,15 @@ export default function Content() {
         <Route path={"/"} element={<Home products={products} />} />
         <Route
           path={"/product-list"}
-          element={<ProductList products={products} isLoader={isLoader} isError={isError} />}
+          element={
+            <ProductList
+              products={products}
+              isLoader={isLoader}
+              isError={isError}
+            />
+          }
         />
-        <Route path={"/:id"} element={<Product />} />
+        <Route path={"/:id"} element={<Product/>} />
       </Routes>
     </BrowserRouter>
   );
