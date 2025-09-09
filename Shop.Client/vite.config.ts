@@ -5,7 +5,7 @@ import { resolve } from 'path';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-
+  base: "https://github.com/LiliiaGalkina/Shop.Project/tree/main/Shop.Client",
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -18,5 +18,5 @@ export default defineConfig({
     port: 3000,
     open: true,
     cors: true,
-  }
+  },
 });
