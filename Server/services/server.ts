@@ -11,6 +11,9 @@ export function initServer(): Express {
   app.use(jsonMiddleware);
 
   app.use(cors());
+  app.get("/api/data", (req, res) => {
+    res.json({ message: "CORS is enabled for all origins!" });
+  });
 
   app.listen(port, host, () => {
     console.log(`Server running on port ${port}`);
